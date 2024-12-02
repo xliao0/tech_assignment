@@ -4,13 +4,18 @@ from typing import Dict
 from collections import defaultdict
 import logging
 
-logging.basicConfig(level=logging.WARNING)
+logging.basicConfig(
+    level=logging.WARNING,
+    filename="app.log",
+    filemode="a",
+    format="%(asctime)s - %(levelname)s - %(message)s",
+)
 
 
 class ThresholdFinder:
     def __init__(self, target_recall: float = 0.9):
         """
-        initilization
+        Initilization
         :param data_file_path:
         :param target_recall: Traget Recall, 0.9 as default
         """
@@ -20,7 +25,7 @@ class ThresholdFinder:
         self.best_threshold = None
 
     def load_data_from_json(self, data_file_path) -> "ThresholdFinder":
-        # load data from json file
+        # Load data from json file
         try:
             with open(data_file_path, "r") as f:
                 data = json.load(f)
@@ -40,7 +45,7 @@ class ThresholdFinder:
             raise
 
     def cal_recall(self, threshold: float) -> float:
-        # calculate traget recall
+        # Calculate traget recall
         tp, fn = self.data[threshold]["TP"], self.data[threshold]["FN"]
         if tp + fn == 0:
             logging.warning(
@@ -51,7 +56,7 @@ class ThresholdFinder:
         return tp / (tp + fn)
 
     def find_upper_threshold(self) -> "ThresholdFinder":
-        # find highest threshold w/ binary search
+        # Find highest threshold w/ binary search
         thresholds = sorted(self.data.keys(), reverse=True)
         l, r = 0, len(thresholds) - 1
         while l < r:
@@ -69,11 +74,15 @@ class ThresholdFinder:
         return self
 
     def calculate_f1_score(self, threshold: float) -> float:
-        # calcaulte f1
+        # Calcaulte f1
         tp, fp = (
             self.data[threshold]["TP"],
             self.data[threshold]["FP"],
         )
+        if tp + fp == 0:
+            logging.warning(f"F1 calculation: TP + FP is 0 for threshold {threshold}")
+            return 0.0
+
         precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
         recall = self.cal_recall(threshold)
         if precision + recall == 0:
@@ -86,7 +95,7 @@ class ThresholdFinder:
         return f1
 
     def find_best_threshold(self) -> "ThresholdFinder":
-        # find threshlod w/ best f1
+        # Find threshlod w/ best f1
         if self.upper_threshold is None:
             logging.error(
                 "Upper threshold not found. Run find_upper_threshold() first."
