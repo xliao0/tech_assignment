@@ -1,3 +1,10 @@
+## Environment and Requirements
+
+- **Environment**: Python 3.13.0
+- **Requirements**: 
+  - `pytest==8.3.3`
+  
+  
 ## 1. Assignment 1: Finding the Best Threshold
 
 ### 1.1 Explanation
