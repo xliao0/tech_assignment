@@ -100,7 +100,7 @@ Here is an example of how the data in the JSON file should be structured:
 ## 2. Assignment 2: FSM
 
 ### 2.1 Explanation
-
+A Mode-Three FA inherits functionality from a generic Finite State Machine.
 
 ### 2.2 Usage
 To run the program, use the following command:
