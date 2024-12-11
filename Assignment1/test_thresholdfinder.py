@@ -15,10 +15,14 @@ def test_edge_cases():
     # Test empty data
     with pytest.raises(FileNotFoundError):
         finder.process("nonexistent.json")
+    
 
     # Test invalid JSON
     with pytest.raises(json.JSONDecodeError):
         finder.process("invalid.json")
+
+    with pytest.raises(json.JSONDecodeError):
+        finder.process("new_data.json")
 
     # Test different target recalls
     finder = ThresholdFinder(target_recall=0.95)

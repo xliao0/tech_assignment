@@ -4,7 +4,7 @@
 - **Requirements**: 
   - `pytest==8.3.3`
   
-  
+
 ## 1. Assignment 1: Finding the Best Threshold
 
 ### 1.1 Explanation
@@ -23,6 +23,7 @@ Identifying the best threshold for a binary classification model based on recall
 To run the program, use the following command:
 
 ```bash
+# Navigate to folder Assignment1
 python best_threshold.py --data_file_path <path-you-data-file.json>
 ```
 
@@ -30,7 +31,8 @@ python best_threshold.py --data_file_path <path-you-data-file.json>
 To run the tests for this assignment, use the following command:
 
 ```bash
-pytest test.py
+# Navigate to folder Assignment1
+pytest test_thresholdfinder.py
 ```
 
 ### 1.4 Data Example
@@ -113,6 +115,7 @@ A Mode-Three FA inherits functionality from a generic Finite State Machine.
 To run the program, use the following command:
 
 ```bash
+# Navigate to folder Assignment2
 python finit_state_machine.py --input <your-binary-number>
 ```
 
@@ -120,5 +123,6 @@ python finit_state_machine.py --input <your-binary-number>
 To run the tests for this assignment, use the following command:
 
 ```bash
-pytest test_fsm.py```
+# Navigate to folder Assignment2
+pytest test_fsm.py
 ```
